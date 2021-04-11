@@ -1,9 +1,16 @@
 const express = require('express');
-const bodyParser = require('body-parser')
 const path = require('path');
-const app = express();
-app.use(express.static(path.join(__dirname, 'build')));
+const api = require("./src/api");
+const bodyParser = require('body-parser');
 
+const app = express();
+app.use(bodyParser.json());
+
+// Main API
+app.get('/project', api.loadProject);
+app.post('/project', api.saveProject);
+
+// Ping for health
 app.get('/health', function (req, res) {
     return res.send('healthy!');
 });

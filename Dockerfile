@@ -15,5 +15,5 @@ COPY . /usr/src/app
 # Expose port 8080 for server APIs
 EXPOSE 8080
 
-# Start server within container
-CMD ['node', 'server.js']
+# Start server within container using package.json run script command
+CMD npm run-script run
