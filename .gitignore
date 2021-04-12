@@ -111,6 +111,9 @@ dist
 # intellij
 .idea
 
+# MongoDB persistent storage
+./data
+
 # yarn v2
 .yarn/cache
 .yarn/unplugged
