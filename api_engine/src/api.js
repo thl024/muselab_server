@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 var base64 = require('base64-arraybuffer');
+const {retrieveSoundMetadata} = require("./dal");
 
 const {toArrayBuffer} = require("./utils");
 const {retrieveProject} = require("./dal");
@@ -56,8 +57,13 @@ function loadProject(req, res) {
 }
 
 function loadAllSoundMetadata(req, res) {
-
-    return res.json()
+    retrieveSoundMetadata((users) => {
+        res.json(users);
+    }, (error) => {
+        console.log(error);
+        res.sendStatus(500);
+    })
+    return res;
 }
 
 function loadSoundLibrary(req, res) {

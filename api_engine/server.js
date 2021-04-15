@@ -15,8 +15,8 @@ app.get('/project', api.loadProject);
 app.post('/project', api.saveProject);
 
 // Sound File API
-app.get('./sounds', api.loadAllSoundMetadata)
-app.get('./sound', api.loadSoundLibrary);
+app.get('/sounds', api.loadAllSoundMetadata)
+app.get('/sound', api.loadSoundLibrary);
 
 // Ping for health
 app.get('/health', function (req, res) {

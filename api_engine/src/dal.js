@@ -48,5 +48,15 @@ function retrieveProject(pid, callback) {
     }
 }
 
+function retrieveSoundMetadata(callback, err_callback) {
+    models.AudioMetadata.find({}, '_id name type', (err, users) => {
+        if (err) {
+            err_callback(err);
+        } else {
+            callback(users)
+        }
+    })
+}
 
-module.exports = {storeProject, retrieveProject};
+
+module.exports = {storeProject, retrieveProject, retrieveSoundMetadata};

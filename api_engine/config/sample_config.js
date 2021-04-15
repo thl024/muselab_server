@@ -1,9 +1,11 @@
 // Sample Config
-const env = process.env.NODE_ENV; // 'dev' or 'test'
+const env = process.env.NODE_ENV;
+var path = require('path');
 
 const dev = {
     app: {
-        port: parseInt(process.env.DEV_APP_PORT) || 8080
+        port: parseInt(process.env.DEV_APP_PORT) || 8080,
+        loc: path.dirname(require.main.filename) + "audio/",
     },
     db: {
         host: process.env.DEV_DB_HOST || 'mongo',
@@ -13,14 +15,6 @@ const dev = {
         username: "",
         password: ""
     },
-    audio_db: {
-        host: process.env.DEV_DB_HOST || 'mongo',
-        port: parseInt(process.env.DEV_DB_PORT) || 27017,
-        name: process.env.DEV_DB_NAME || 'Audio',
-        url: "mongodb://mongo:27017",
-        username: "",
-        password: ""
-    }
 };
 
 const prod = {

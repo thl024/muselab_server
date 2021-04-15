@@ -10,8 +10,6 @@ function allowCrossDomain(req, res, next) {
 
     res.setHeader('Access-Control-Allow-Credentials', true);
 
-    console.log(req.body);
-
     if (req.method === 'OPTIONS') {
         res.sendStatus(200);
     } else {
