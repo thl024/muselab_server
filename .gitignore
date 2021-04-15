@@ -112,7 +112,7 @@ dist
 .idea
 
 # MongoDB persistent storage
-data/*
+mongo/data/*
 
 # Server app config
 ./api_engine/config/config.js
