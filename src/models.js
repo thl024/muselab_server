@@ -10,4 +10,14 @@ let ProjectSchema = new mongoose.Schema({
     }],
 });
 
-module.exports = mongoose.model("Project", ProjectSchema);
+let AudioMetadataSchema = new mongoose.Schema({
+    dateSaved: { type: Date, default: Date.now },
+    name: String,
+    src: String,
+    type: String,
+});
+
+module.exports = {
+    Project: mongoose.model("Project", ProjectSchema),
+    AudioMetadata: mongoose.model("AudioMetadata", AudioMetadataSchema)
+};

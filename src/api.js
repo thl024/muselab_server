@@ -1,7 +1,14 @@
+const fs = require("fs");
+const path = require("path");
+var base64 = require('base64-arraybuffer');
+
+const {toArrayBuffer} = require("./utils");
 const {retrieveProject} = require("./dal");
 const {storeProject} = require("./dal");
+const {config} = require("../config/config")
 
 function saveProject(req, res) {
+    // Save project to DB
     try {
         storeProject(req.body, (err, proj) => {
             if (err) {
@@ -30,6 +37,7 @@ function loadProject(req, res) {
         return;
     }
 
+    // Load project from DB
     try {
         retrieveProject(pid, function (err, project) {
             if (err) {
@@ -47,5 +55,35 @@ function loadProject(req, res) {
     return res;
 }
 
-exports.saveProject = saveProject;
-exports.loadProject = loadProject;
+function loadAllSoundMetadata(req, res) {
+
+    return res.json()
+}
+
+function loadSoundLibrary(req, res) {
+    // TODO -- parse req
+    // TODO -- store audio types and metadata in db and query
+    // const buffer = fs.readFileSync(path.resolve(__dirname, config.app.loc + "/acoustic_grand_piano"));
+    const buffer = fs.readFileSync(path.resolve(__dirname, config.app.loc + "/hats/hat1.wav"));
+
+    // Sound.create({
+    //     instrument: 'Piano',
+    //     audio: buffer,
+    //     note: 'C4'
+    // });
+
+    const arrayBuffer = base64.encode(toArrayBuffer(buffer));
+    return res.json({
+        instrument: null,
+        type: "wav",
+        buffer: arrayBuffer,
+        note: null,
+    })
+}
+
+module.exports = {
+    saveProject: saveProject,
+    loadProject: loadProject,
+    loadAllSoundMetadata: loadAllSoundMetadata,
+    loadSoundLibrary: loadSoundLibrary,
+}

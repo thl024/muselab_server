@@ -1,8 +1,8 @@
 const express = require('express');
-const path = require('path');
 const api = require("./src/api");
 const bodyParser = require('body-parser');
 const allowCrossDomain = require("./src/middleware");
+const {config} = require('./config/config')
 
 const app = express();
 
@@ -10,9 +10,13 @@ const app = express();
 app.use(allowCrossDomain)
 app.use(bodyParser.json());
 
-// Main API
+// Project API
 app.get('/project', api.loadProject);
 app.post('/project', api.saveProject);
+
+// Sound File API
+app.get('./sounds', api.loadAllSoundMetadata)
+app.get('./sound', api.loadSoundLibrary);
 
 // Ping for health
 app.get('/health', function (req, res) {
@@ -20,4 +24,4 @@ app.get('/health', function (req, res) {
 });
 
 console.log("Listening on port 8080");
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || config.app.port);

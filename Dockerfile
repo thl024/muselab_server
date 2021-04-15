@@ -15,5 +15,9 @@ COPY . /usr/src/app
 # Expose port 8080 for server APIs
 EXPOSE 8080
 
+# Set environment variable for node, default value set to dev
+ARG NODE_ENV=dev
+ENV NODE_ENV=$NODE_ENV
+
 # Start server within container using package.json run script command
 CMD npm run-script run

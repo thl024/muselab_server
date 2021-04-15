@@ -1,13 +1,10 @@
 let mongoose = require("mongoose")
 let Project = require("./models")
-
-// TODO -- Configuration File
-DB_URI = "mongodb://mongo:27017"
-DB_NAME = "Projects"
+const {config} = require("../config/config");
 
 // MongoDB CONNECTION EVENTS
 mongoose.connection.on('connected', function () {
-    console.log('Mongoose default connection open to ' + DB_URI);
+    console.log('Mongoose default connection open to ' + config.db.url);
 });
 
 // If the connection throws an error
@@ -18,12 +15,10 @@ mongoose.connection.on('error',function (err) {
     process.exit(0);
 });
 
-mongoose.connect(DB_URI + "/" + DB_NAME, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(config.db.url + "/" + config.db.name, {useNewUrlParser: true, useUnifiedTopology: true});
 
 function storeProject(projectJSON, callback, notExistsCallback) {
-    console.log(projectJSON);
-    if (projectJSON.pid !== undefined &&
-        mongoose.isValidObjectId(projectJSON.pid)) {
+    if (projectJSON.pid !== undefined && mongoose.isValidObjectId(projectJSON.pid)) {
         Project.findById(projectJSON.pid, (err, proj) => {
             if (err !== null) {
                 callback(err, null);

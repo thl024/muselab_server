@@ -114,6 +114,9 @@ dist
 # MongoDB persistent storage
 data/*
 
+# Server app config
+config/config.js
+
 # yarn v2
 .yarn/cache
 .yarn/unplugged
