@@ -2,8 +2,12 @@ const express = require('express');
 const path = require('path');
 const api = require("./src/api");
 const bodyParser = require('body-parser');
+const allowCrossDomain = require("./src/middleware");
 
 const app = express();
+
+// Middleware
+app.use(allowCrossDomain)
 app.use(bodyParser.json());
 
 // Main API

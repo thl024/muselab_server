@@ -1,13 +1,7 @@
 const {retrieveProject} = require("./dal");
 const {storeProject} = require("./dal");
 
-function configureRespHeaders(res) {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000'); // TODO -- config
-    res.setHeader('Content-Type', 'application/json');
-}
-
 function saveProject(req, res) {
-    configureRespHeaders(res);
     try {
         storeProject(req.body, (err, proj) => {
             if (err) {
@@ -28,7 +22,6 @@ function saveProject(req, res) {
 }
 
 function loadProject(req, res) {
-    configureRespHeaders(res);
     const pid = req.query.pid
 
     // Non existent pid

@@ -21,6 +21,7 @@ mongoose.connection.on('error',function (err) {
 mongoose.connect(DB_URI + "/" + DB_NAME, {useNewUrlParser: true, useUnifiedTopology: true});
 
 function storeProject(projectJSON, callback, notExistsCallback) {
+    console.log(projectJSON);
     if (projectJSON.pid !== undefined &&
         mongoose.isValidObjectId(projectJSON.pid)) {
         Project.findById(projectJSON.pid, (err, proj) => {
