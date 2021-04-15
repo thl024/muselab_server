@@ -10,7 +10,7 @@ COPY package.json /usr/src/app
 RUN npm install
 
 # Copy app
-COPY . /usr/src/app
+COPY .. /usr/src/app
 
 # Expose port 8080 for server APIs
 EXPOSE 8080

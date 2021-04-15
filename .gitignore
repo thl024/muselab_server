@@ -38,7 +38,7 @@ bower_components
 build/Release
 
 # Dependency directories
-node_modules/
+api_engine/node_modules/
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
@@ -115,7 +115,7 @@ dist
 data/*
 
 # Server app config
-config/config.js
+./api_engine/config/config.js
 
 # yarn v2
 .yarn/cache

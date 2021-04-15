@@ -1,5 +1,5 @@
 let mongoose = require("mongoose")
-let Project = require("./models")
+let models = require("./models")
 const {config} = require("../config/config");
 
 // MongoDB CONNECTION EVENTS
@@ -19,7 +19,7 @@ mongoose.connect(config.db.url + "/" + config.db.name, {useNewUrlParser: true, u
 
 function storeProject(projectJSON, callback, notExistsCallback) {
     if (projectJSON.pid !== undefined && mongoose.isValidObjectId(projectJSON.pid)) {
-        Project.findById(projectJSON.pid, (err, proj) => {
+        models.Project.findById(projectJSON.pid, (err, proj) => {
             if (err !== null) {
                 callback(err, null);
                 return;
@@ -35,14 +35,14 @@ function storeProject(projectJSON, callback, notExistsCallback) {
             proj.save(callback);
         });
     } else {
-        const project = new Project(projectJSON);
+        const project = new models.Project(projectJSON);
         project.save(callback);
     }
 }
 
 function retrieveProject(pid, callback) {
     if (pid !== undefined && mongoose.isValidObjectId(pid)) {
-        Project.findById(pid, callback);
+        models.Project.findById(pid, callback);
     } else {
         callback("Invalid object ID");
     }

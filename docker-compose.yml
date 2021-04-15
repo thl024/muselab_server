@@ -4,7 +4,7 @@ services:
         container_name: muselab_server
         image: muselab_server
         restart: always
-        build: .
+        build: "./api_engine"
         ports:
           - "8080:8080"
         links:
