@@ -13,7 +13,8 @@ let ProjectSchema = new mongoose.Schema({
 let AudioMetadataSchema = new mongoose.Schema({
     name: String,
     src: String,
-    type: String,
+    sound_type: String,
+    file_type: String,
 });
 
 module.exports = {

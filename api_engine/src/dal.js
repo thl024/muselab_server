@@ -48,15 +48,13 @@ function retrieveProject(pid, callback) {
     }
 }
 
-function retrieveSoundMetadata(callback, err_callback) {
-    models.AudioMetadata.find({}, '_id name type', (err, users) => {
-        if (err) {
-            err_callback(err);
-        } else {
-            callback(users)
-        }
-    })
+function retrieveSoundMetadata(callback) {
+    models.AudioMetadata.find({}, '_id name sound_type', callback);
+}
+
+function retrieveSoundSrc(soundID, callback) {
+    models.AudioMetadata.findOne({_id: soundID}, 'src file_type sound_type', callback);
 }
 
 
-module.exports = {storeProject, retrieveProject, retrieveSoundMetadata};
+module.exports = {storeProject, retrieveProject, retrieveSoundMetadata, retrieveSoundSrc};
